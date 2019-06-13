@@ -1,0 +1,85 @@
+{
+    "ipcMode": null,
+    "executionRoleArn": null,
+    "containerDefinitions": [
+        {
+            "dnsSearchDomains": null,
+            "logConfiguration": null,
+            "entryPoint": null,
+            "portMappings": [],
+            "command": null,
+            "linuxParameters": null,
+            "cpu": 0,
+            "environment": [
+                {
+                    "name": "DNS_UPSTREAM",
+                    "value": "1.1.1.1"
+                },
+                {
+                    "name": "DNS_PROMETHEUS_PORT",
+                    "value": "9153"
+                },
+                {
+                    "name": "DNS_CACHE_TIME",
+                    "value": "120"
+                },
+                {
+                    "name": "DNS_CACHE_PREFETCH",
+                    "value": "10"
+                },
+                {
+                    "name": "DNS_CACHE_SUCCESS",
+                    "value": "5000"
+                },
+                {
+                    "name": "DNS_HEALTH_PORT",
+                    "value": "8080"
+                },
+                {
+                    "name": "DNS_CACHE_DENIAL",
+                    "value": "2500"
+                }
+            ],
+            "resourceRequirements": null,
+            "ulimits": null,
+            "dnsServers": null,
+            "mountPoints": [],
+            "workingDirectory": null,
+            "secrets": null,
+            "dockerSecurityOptions": null,
+            "memory": null,
+            "memoryReservation": null,
+            "volumesFrom": [],
+            "stopTimeout": null,
+            "image": "jasonswindle/ecs-local-dns-cache",
+            "startTimeout": null,
+            "dependsOn": null,
+            "disableNetworking": null,
+            "interactive": null,
+            "healthCheck": null,
+            "essential": true,
+            "links": null,
+            "hostname": null,
+            "extraHosts": null,
+            "pseudoTerminal": null,
+            "user": null,
+            "readonlyRootFilesystem": null,
+            "dockerLabels": null,
+            "systemControls": null,
+            "privileged": null,
+            "name": "dns-cache"
+        }
+    ],
+    "memory": "128",
+    "taskRoleArn": null,
+    "family": "ecs-local-dns-cache",
+    "pidMode": null,
+    "requiresCompatibilities": [
+        "EC2"
+    ],
+    "networkMode": "host",
+    "cpu": "256",
+    "proxyConfiguration": null,
+    "volumes": [],
+    "placementConstraints": []
+}
