@@ -22,41 +22,20 @@ This project can handle DNS caching just for the docker containers or for the wh
 ## Setup
 Please make sure to change the place-holder Upstream DNS server IP in this example (1.1.1.1) with your own. 
 
-### Step 1a
-
-- On the EC2 instance create the link-local address 169.254.255.254. (Source: https://github.com/gliderlabs/hostlocal)
-
-```bash
-cat >> /etc/sysconfig/network-scripts/ifcfg-lo << EOM
-IPADDR1="169.254.255.254"
-PREFIX1="24"
-EOM
-```
-
-### Step 1b
-
-- Bring up the link-local address.
-
-```
-ifup lo
-```
-
-
-
-### Step 2
+### Step 1
 
 - Run the Daemon set `ecs-local-dns-cache.taskdef.json`.
 
-### Step 3
+### Step 2
 
 - Set the "DNS" flag for your other containers to "169.254.255.254" in ECS.
 
-### Step 4
+### Step 3
 
 - Verify it is working on the EC2 instance.
 
 ``` bash
-# Run this two times
+# Run this twice
 docker run --dns=169.254.255.254 jasonswindle/docker-tools:drill google.com
 ```
 
@@ -67,7 +46,7 @@ curl -s localhost:9153/metrics | grep 'coredns_cache_hits_total{server="dns://:5
 coredns_cache_hits_total{server="dns://:53",type="success"} 1
 ```
 
-### Step 5 ( _Optional_ DNS Caching for Containers and Host )
+### Step 4 ( _Optional_ DNS Caching for Containers and Host )
 
 - Edit /etc/dhcp/dhclient.conf, and add to the bottom:
 
