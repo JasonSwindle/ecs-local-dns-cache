@@ -15,10 +15,10 @@ echo 'Starting healthcheck.'
 ## check the endpoint. If there is a failure, increment by one.
 while [ $FAILURES -le $MAX_FAILURES ]; do
   sleep $INTERVAL
-  if curl --silent localhost:8080/health | grep --ignore-case --silent 'OK'; then    
+  if wget -q localhost:8080/health 2>/dev/null | grep -i -s 'OK'; then
     FAILURES=1
   else
     echo "Health check failure" $FAILURES
-    ((FAILURES++))
+    FAILURES=$((FAILURES+1))
   fi
 done
