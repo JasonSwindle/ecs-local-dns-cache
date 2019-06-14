@@ -4,6 +4,7 @@ FAILURES=1
 MAX_FAILURES=5
 START_PERIOD=5
 INTERVAL=5
+HEALTHCHECK_PORT=8080
 
 ## How long to wait until health checks should start
 sleep $START_PERIOD
@@ -15,7 +16,7 @@ echo 'Starting healthcheck.'
 ## check the endpoint. If there is a failure, increment by one.
 while [ $FAILURES -le $MAX_FAILURES ]; do
   sleep $INTERVAL
-  if wget -q localhost:8080/health 2>/dev/null | grep -i -s 'OK'; then
+  if curl -s localhost:$HEALTHCHECK_PORT/health | grep -i -s 'OK'; then
     FAILURES=1
   else
     echo "Health check failure" $FAILURES
