@@ -1,141 +1,75 @@
 {
-    "ipcMode": null,
-    "executionRoleArn": null,
-    "containerDefinitions": [
-        {
-            "dnsSearchDomains": null,
-            "logConfiguration": null,
-            "entryPoint": null,
-            "portMappings": [],
-            "command": null,
-            "linuxParameters": null,
-            "cpu": 0,
-            "environment": [
-                {
-                    "name": "DNS_UPSTREAM",
-                    "value": "1.1.1.1"
-                },
-                {
-                    "name": "DNS_PROMETHEUS_PORT",
-                    "value": "9153"
-                },
-                {
-                    "name": "DNS_CACHE_TIME",
-                    "value": "120"
-                },
-                {
-                    "name": "DNS_CACHE_PREFETCH",
-                    "value": "10"
-                },
-                {
-                    "name": "DNS_CACHE_SUCCESS",
-                    "value": "5000"
-                },
-                {
-                    "name": "DNS_HEALTH_PORT",
-                    "value": "8080"
-                },
-                {
-                    "name": "DNS_CACHE_DENIAL",
-                    "value": "2500"
-                }
-            ],
-            "resourceRequirements": null,
-            "ulimits": null,
-            "dnsServers": null,
-            "mountPoints": [],
-            "workingDirectory": null,
-            "secrets": null,
-            "dockerSecurityOptions": null,
-            "memory": null,
-            "memoryReservation": null,
-            "volumesFrom": [],
-            "stopTimeout": null,
-            "image": "jasonswindle/ecs-local-dns-cache",
-            "startTimeout": null,
-            "dependsOn": [
-                {
-                    "containerName": "router-creater",
-                    "condition": "COMPLETE"
-                }
-            ],
-            "disableNetworking": null,
-            "interactive": null,
-            "healthCheck": null,
-            "essential": true,
-            "links": null,
-            "hostname": null,
-            "extraHosts": null,
-            "pseudoTerminal": null,
-            "user": null,
-            "readonlyRootFilesystem": null,
-            "dockerLabels": null,
-            "systemControls": null,
-            "privileged": null,
-            "name": "dns-cache"
+  "containerDefinitions": [{
+      "linuxParameters": {
+        "capabilities": {
+          "add": [
+            "NET_BIND_SERVICE"
+          ],
+          "drop": [
+            "ALL"
+          ]
+        }
+      },
+      "cpu": 0,
+      "environment": [{
+          "name": "DNS_UPSTREAM",
+          "value": "172.31.0.2"
         },
         {
-            "dnsSearchDomains": null,
-            "logConfiguration": null,
-            "entryPoint": null,
-            "portMappings": [],
-            "command": null,
-            "linuxParameters": {
-                "capabilities": {
-                    "add": [
-                        "NET_ADMIN"
-                    ],
-                    "drop": [
-                        "ALL"
-                    ]
-                },
-                "sharedMemorySize": null,
-                "tmpfs": null,
-                "devices": null,
-                "initProcessEnabled": null
-            },
-            "cpu": 0,
-            "environment": [],
-            "resourceRequirements": null,
-            "ulimits": null,
-            "dnsServers": null,
-            "mountPoints": [],
-            "workingDirectory": null,
-            "secrets": null,
-            "dockerSecurityOptions": null,
-            "memory": null,
-            "memoryReservation": null,
-            "volumesFrom": [],
-            "stopTimeout": null,
-            "image": "gliderlabs/hostlocal",
-            "startTimeout": null,
-            "dependsOn": null,
-            "disableNetworking": null,
-            "interactive": null,
-            "healthCheck": null,
-            "essential": false,
-            "links": null,
-            "hostname": null,
-            "extraHosts": null,
-            "pseudoTerminal": null,
-            "user": null,
-            "readonlyRootFilesystem": null,
-            "dockerLabels": null,
-            "systemControls": null,
-            "privileged": null,
-            "name": "route-creater"
+          "name": "DNS_PROMETHEUS_PORT",
+          "value": "9153"
+        },
+        {
+          "name": "DNS_CACHE_TIME",
+          "value": "120"
+        },
+        {
+          "name": "DNS_CACHE_PREFETCH",
+          "value": "10"
+        },
+        {
+          "name": "DNS_CACHE_SUCCESS",
+          "value": "5000"
+        },
+        {
+          "name": "DNS_HEALTH_PORT",
+          "value": "8080"
+        },
+        {
+          "name": "DNS_CACHE_DENIAL",
+          "value": "2500"
         }
-    ],
-    "memory": "128",
-    "taskRoleArn": null,
-    "family": "ecs-local-dns-cache",
-    "pidMode": null,
-    "requiresCompatibilities": [
-        "EC2"
-    ],
-    "networkMode": "host",
-    "cpu": "256",
-    "proxyConfiguration": null,
-    "volumes": [],
-    "placementConstraints": []
+      ],
+      "image": "jasonswindle/ecs-local-dns-cache",
+      "dependsOn": [{
+        "containerName": "route-creater",
+        "condition": "COMPLETE"
+      }],
+      "readonlyRootFilesystem": true,
+      "name": "dns-cache"
+    },
+    {
+      "linuxParameters": {
+        "capabilities": {
+          "add": [
+            "NET_ADMIN"
+          ],
+          "drop": [
+            "ALL"
+          ]
+        }
+      },
+      "cpu": 0,
+      "image": "gliderlabs/hostlocal",
+      "essential": false,
+      "name": "route-creater"
+    }
+  ],
+  "memory": "128",
+  "family": "ecs-local-dns-cache",
+  "requiresCompatibilities": [
+    "EC2"
+  ],
+  "networkMode": "host",
+  "cpu": "256"
 }
