@@ -17,7 +17,7 @@ echo 'Starting healthcheck.'
 ## check the endpoint. If there is a failure, increment by one.
 while [ $FAILURES -le $MAX_FAILURES ]; do
   sleep $INTERVAL
-  if curl --connect-timeout 5 --silent localhost:$HEALTHCHECK_PORT/health | grep -i -s -q 'OK'; then
+  if curl --connect-timeout $TIMEOUT --silent localhost:$HEALTHCHECK_PORT/health | grep -i -s -q 'OK'; then
     FAILURES=1
   else
     echo "Health check failure" $FAILURES
