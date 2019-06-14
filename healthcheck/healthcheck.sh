@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 FAILURES=1
 MAX_FAILURES=5
