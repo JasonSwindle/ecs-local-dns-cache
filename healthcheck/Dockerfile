@@ -6,4 +6,6 @@ ENV START_PERIOD=1 \
 
 ADD healthcheck.sh /healthcheck.sh
 
+RUN chmod +x /healthcheck.sh
+
 ENTRYPOINT ["/healthcheck.sh"]
