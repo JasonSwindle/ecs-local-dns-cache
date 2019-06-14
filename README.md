@@ -13,13 +13,26 @@
 | DNS_CACHE_DENIAL | The maximum number of packets CoreDNS caches before we start evicting (LRU) | 2500 |
 
 ## Setup
-### Step 1
+### Step 1a
 
 - On the EC2 instance create the link-local address 169.254.255.254. (Source: https://github.com/gliderlabs/hostlocal)
 
 ```bash
-ip addr add 169.254.255.254/24 dev lo:0
+cat >> /etc/sysconfig/network-scripts/ifcfg-lo << EOM
+IPADDR1="169.254.255.254"
+PREFIX1="24"
+EOM
 ```
+
+### Step 1b
+
+- Bring up the link-local address.
+
+```
+ifup lo
+```
+
+
 
 ### Step 2
 
