@@ -90,6 +90,10 @@
           "value": "5"
         },
         {
+          "name": "TIMEOUT",
+          "value": "5"
+        },
+        {
           "name": "HEALTHCHECK_PORT",
           "value": "8080"
         }
