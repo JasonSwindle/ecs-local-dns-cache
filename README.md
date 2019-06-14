@@ -1,6 +1,12 @@
 # ECS Local DNS Cache
 This project can handle DNS caching just for the docker containers or for the whole instance.  The caching application is CoreDNS with a very simple CoreFile.
 
+## Tested AMIs
+| AMI | Tested | Status |
+| --- | ---    | ---    |
+| ECS Amazon Linux | Yes | Works |
+| ECS Amazon Linux 2 | No | |
+
 ## Environment Variables
 
 | Variables | Description | Example |
