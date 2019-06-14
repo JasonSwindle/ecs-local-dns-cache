@@ -39,15 +39,15 @@ ifup lo
 
 ### Step 2
 
-- Run the Daemon set `ecs-local-dns-cache.taskdef.json`
+- Run the Daemon set `ecs-local-dns-cache.taskdef.json`.
 
 ### Step 3
 
-- Set the "DNS" flag for your other containers to "169.254.255.254".
+- Set the "DNS" flag for your other containers to "169.254.255.254" in ECS.
 
 ### Step 4
 
-- Verify it is working on the EC2 instance
+- Verify it is working on the EC2 instance.
 
 ``` bash
 # Run this two times
@@ -63,9 +63,7 @@ coredns_cache_hits_total{server="dns://:53",type="success"} 1
 
 ### Step 5 ( _Optional_ DNS Caching for Containers and Host )
 
-- Edit 
-
-sudo /etc/dhcp/dhclient.conf, and add:
+- Edit /etc/dhcp/dhclient.conf, and add to the bottom:
 
 ```bash
 supersede domain-name-servers 169.254.255.254, 1.1.1.1;
@@ -73,7 +71,7 @@ supersede domain-name-servers 169.254.255.254, 1.1.1.1;
 
 - Run dhclient
 
-```
+```bash
 sudo dhclient
 ```
 
