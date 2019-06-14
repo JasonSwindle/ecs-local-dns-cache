@@ -46,20 +46,6 @@ curl -s localhost:9153/metrics | grep 'coredns_cache_hits_total{server="dns://:5
 coredns_cache_hits_total{server="dns://:53",type="success"} 1
 ```
 
-### Step 4 ( _Optional_ DNS Caching for Containers and Host )
-
-- Edit /etc/dhcp/dhclient.conf, and add to the bottom:
-
-```bash
-supersede domain-name-servers 169.254.255.254, 172.31.0.2;
-```
-
-- Run dhclient
-
-```bash
-sudo dhclient
-```
-
 ## FAQ
 - Q: Does this work for ECS Bridge Mode?
   - A: This is all I have tested it on at the moment.
