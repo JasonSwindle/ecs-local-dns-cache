@@ -45,6 +45,7 @@
         "containerName": "route-creater",
         "condition": "COMPLETE"
       }],
+      "essential": true,
       "readonlyRootFilesystem": true,
       "name": "dns-cache"
     },
@@ -63,6 +64,44 @@
       "image": "gliderlabs/hostlocal",
       "essential": false,
       "name": "route-creater"
+    },
+    {
+      "linuxParameters": {
+        "capabilities": {
+          "add": [
+            "NET_BIND_SERVICE"
+          ],
+          "drop": [
+            "ALL"
+          ]
+        }
+      },
+      "cpu": 0,
+      "environment": [{
+          "name": "INTERVAL",
+          "value": "5"
+        },
+        {
+          "name": "MAX_FAILURES",
+          "value": "5"
+        },
+        {
+          "name": "START_PERIOD",
+          "value": "5"
+        },
+        {
+          "name": "HEALTHCHECK_PORT",
+          "value": "8080"
+        }
+      ],
+      "image": "jasonswindle/ecs-local-dns-cache-healthcheck",
+      "dependsOn": [{
+        "containerName": "dns-cache",
+        "condition": "START"
+      }],
+      "essential": true,
+      "readonlyRootFilesystem": true,
+      "name": "dns-cache-healthcheck"
     }
   ],
   "memory": "128",
