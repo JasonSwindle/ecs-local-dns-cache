@@ -11,7 +11,7 @@ This project can handle DNS caching just for the docker containers or for the wh
 
 | Variables | Description | Example |
 | --- | ---   | ---     |
-| DNS_UPSTREAM | Your Upstream DNS to forward to if the request is not in cache. | 1.1.1.1 |
+| DNS_UPSTREAM | Your Upstream DNS to forward to if the request is not in cache. | 172.31.0.2 |
 | DNS_PROMETHEUS_PORT | What port you want the metrics exposed on. E.G. [PORT]:`/metrics`. | 9153 |
 | DNS_HEALTH_PORT | What port you want the health check exposed on. E.G. [PORT]:`/health`. When CoreDNS is up and running this returns a 200 OK http status code. | 8080 |
 | DNS_CACHE_TIME | TTL in seconds for DNS cache. | 120 |
@@ -20,7 +20,7 @@ This project can handle DNS caching just for the docker containers or for the wh
 | DNS_CACHE_DENIAL | The maximum number of packets CoreDNS caches before we start evicting (LRU). | 2500 |
 
 ## Setup
-Please make sure to change the place-holder Upstream DNS server IP in this example (1.1.1.1) with your own. 
+Please make sure to change the place-holder Upstream DNS server IP in this example (172.31.0.2) with your own. 
 
 ### Step 1
 
