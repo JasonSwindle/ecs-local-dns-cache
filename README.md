@@ -48,10 +48,11 @@ ifup lo
 - Verify it is working on the EC2 instance
 
 ``` bash
+# Run this two times
 docker run --dns=169.254.255.254 jasonswindle/docker-tools:drill google.com
 ```
 
-- You should see output like this:
+- You should now see a success hit (Did you run `drill` twice?):
 
 ```bash
 curl -s localhost:9153/metrics | grep 'coredns_cache_hits_total{server="dns://:53",type="success"}'
