@@ -5,7 +5,7 @@ This project can handle DNS caching just for the docker containers or for the wh
 
 | Variables | Description | Example |
 | --- | ---   | ---     |
-| DNS_UPSTREAM | Your Upstream DNS to forward to if the request is not in cache. | 172.31.0.2 |
+| DNS_UPSTREAM | Your Upstream DNS to forward to if the request is not in cache. | 1.1.1.1 |
 | DNS_PROMETHEUS_PORT | What port you want the metrics exposed on. E.G. [PORT]:`/metrics`. | 9153 |
 | DNS_HEALTH_PORT | What port you want the health check exposed on. E.G. [PORT]:`/health`. When CoreDNS is up and running this returns a 200 OK http status code. | 8080 |
 | DNS_CACHE_TIME | TTL in seconds for DNS cache. | 120 |
@@ -14,6 +14,8 @@ This project can handle DNS caching just for the docker containers or for the wh
 | DNS_CACHE_DENIAL | The maximum number of packets CoreDNS caches before we start evicting (LRU). | 2500 |
 
 ## Setup
+Please make sure to change the place-holder Upstream DNS server IP in this example (1.1.1.1) with your own. 
+
 ### Step 1a
 
 - On the EC2 instance create the link-local address 169.254.255.254. (Source: https://github.com/gliderlabs/hostlocal)
@@ -61,16 +63,18 @@ coredns_cache_hits_total{server="dns://:53",type="success"} 1
 
 ### Step 5 ( _Optional_ DNS Caching for Containers and Host )
 
-- Blank out /etc/resolv.conf
+- Edit 
+
+sudo /etc/dhcp/dhclient.conf, and add:
 
 ```bash
-mv /etc/resolv.conf /etc/resolv.conf.bak
+supersede domain-name-servers 169.254.255.254, 1.1.1.1;
 ```
 
-- Leave a note for others
+- Run dhclient
 
 ```
-echo ";CoreDNS container is handling DNS" > /etc/resolv.conf
+sudo dhclient
 ```
 
 ## FAQ
