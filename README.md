@@ -51,7 +51,7 @@ coredns_cache_hits_total{server="dns://:53",type="success"} 1
 - Edit /etc/dhcp/dhclient.conf, and add to the bottom:
 
 ```bash
-supersede domain-name-servers 169.254.255.254, 1.1.1.1;
+supersede domain-name-servers 169.254.255.254, 172.31.0.2;
 ```
 
 - Run dhclient
