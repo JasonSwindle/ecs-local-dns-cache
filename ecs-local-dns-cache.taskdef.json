@@ -53,7 +53,12 @@
             "stopTimeout": null,
             "image": "jasonswindle/ecs-local-dns-cache",
             "startTimeout": null,
-            "dependsOn": null,
+            "dependsOn": [
+                {
+                    "containerName": "router-creater",
+                    "condition": "COMPLETE"
+                }
+            ],
             "disableNetworking": null,
             "interactive": null,
             "healthCheck": null,
@@ -68,6 +73,57 @@
             "systemControls": null,
             "privileged": null,
             "name": "dns-cache"
+        },
+        {
+            "dnsSearchDomains": null,
+            "logConfiguration": null,
+            "entryPoint": null,
+            "portMappings": [],
+            "command": null,
+            "linuxParameters": {
+                "capabilities": {
+                    "add": [
+                        "NET_ADMIN"
+                    ],
+                    "drop": [
+                        "ALL"
+                    ]
+                },
+                "sharedMemorySize": null,
+                "tmpfs": null,
+                "devices": null,
+                "initProcessEnabled": null
+            },
+            "cpu": 0,
+            "environment": [],
+            "resourceRequirements": null,
+            "ulimits": null,
+            "dnsServers": null,
+            "mountPoints": [],
+            "workingDirectory": null,
+            "secrets": null,
+            "dockerSecurityOptions": null,
+            "memory": null,
+            "memoryReservation": null,
+            "volumesFrom": [],
+            "stopTimeout": null,
+            "image": "gliderlabs/hostlocal",
+            "startTimeout": null,
+            "dependsOn": null,
+            "disableNetworking": null,
+            "interactive": null,
+            "healthCheck": null,
+            "essential": false,
+            "links": null,
+            "hostname": null,
+            "extraHosts": null,
+            "pseudoTerminal": null,
+            "user": null,
+            "readonlyRootFilesystem": null,
+            "dockerLabels": null,
+            "systemControls": null,
+            "privileged": null,
+            "name": "route-creater"
         }
     ],
     "memory": "128",
