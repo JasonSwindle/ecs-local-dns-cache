@@ -5,7 +5,7 @@ This project can handle DNS caching just for the docker containers or for the wh
 | AMI | Tested | Status |
 | --- | ---    | ---    |
 | ECS Amazon Linux | Yes | Works |
-| ECS Amazon Linux 2 | No | |
+| ECS Amazon Linux 2 | Yes | Works |
 
 ## Environment Variables
 
