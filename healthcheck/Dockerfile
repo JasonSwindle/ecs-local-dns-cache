@@ -1,4 +1,4 @@
-FROM busybox
+FROM alpine
 
 ENV START_PERIOD=1 \
     INTERVAL=5 \
@@ -6,6 +6,7 @@ ENV START_PERIOD=1 \
 
 ADD healthcheck.sh /healthcheck.sh
 
-RUN chmod +x /healthcheck.sh
+RUN apk add --no-cache curl && \
+    chmod +x /healthcheck.sh
 
 ENTRYPOINT ["/healthcheck.sh"]
