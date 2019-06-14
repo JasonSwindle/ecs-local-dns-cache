@@ -24,7 +24,7 @@ Please make sure to change the place-holder Upstream DNS server IP in this examp
 
 ### Step 1
 
-- Run the Daemon set `ecs-local-dns-cache.taskdef.json`.
+- Run `ecs-local-dns-cache.taskdef.json` as a Daemon service.
 
 ### Step 2
 
