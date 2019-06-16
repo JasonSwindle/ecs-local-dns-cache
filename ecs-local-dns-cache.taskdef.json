@@ -50,6 +50,15 @@
       "name": "dns-cache"
     },
     {
+      "command": [
+        "addr",
+        "add",
+        "169.254.20.10/32",
+        "dev",
+        "lo",
+        "scope",
+        "host"
+      ],
       "linuxParameters": {
         "capabilities": {
           "add": [
@@ -61,8 +70,9 @@
         }
       },
       "cpu": 0,
-      "image": "gliderlabs/hostlocal",
+      "image": "jasonswindle/ecs-local-dns-cache-route-creater",
       "essential": false,
+      "readonlyRootFilesystem": true,
       "name": "route-creater"
     },
     {
@@ -92,6 +102,10 @@
         {
           "name": "TIMEOUT",
           "value": "5"
+        },
+        {
+          "name": "APPLICATION_NAME",
+          "value": "CoreDNS"
         },
         {
           "name": "HEALTHCHECK_PORT",
