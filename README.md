@@ -43,7 +43,7 @@ Please make sure to change the place-holder Upstream DNS server IP in this examp
 
 ### Step 2
 
-- Set the "DNS" flag for your other containers to "169.254.255.254" in ECS.
+- Set the "DNS" flag for your other containers to "169.254.20.10" in ECS.
 
 ### Step 3
 
@@ -51,7 +51,7 @@ Please make sure to change the place-holder Upstream DNS server IP in this examp
 
 ``` bash
 # Run this twice
-docker run --dns=169.254.255.254 jasonswindle/docker-tools:drill google.com
+docker run --dns=169.254.20.10 jasonswindle/docker-tools:drill google.com
 ```
 
 - You should now see a success hit (Did you run `drill` twice?):
