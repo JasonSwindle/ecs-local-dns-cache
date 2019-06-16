@@ -13,7 +13,7 @@ This project can handle DNS caching just for the docker containers or for the wh
 
 ### DNS Cache Container
 
-| Variables | Description | Example |
+| Variables | Description | Example / Default |
 | --- | ---   | ---     |
 | DNS_UPSTREAM | Your Upstream DNS to forward to if the request is not in cache. | 172.31.0.2 |
 | DNS_PROMETHEUS_PORT | What port you want the metrics exposed on. E.G. [PORT]:`/metrics`. | 9153 |
@@ -25,13 +25,14 @@ This project can handle DNS caching just for the docker containers or for the wh
 
 ### DNS Cache Health Check Container
 
-| Variables | Description | Example |
+| Variables | Description | Example / Default |
 | --- | ---   | ---     |
 | INTERVAL | How long between each health check interval. In seconds. | 5 |
 | RETRIES | Max number of failures before health check fails. | 5 |
 | START_PERIOD | How long to wait until the health check starts. In seconds. | 5 |
 | TIMEOUT | How long the health check should wait before timing out. In seconds. | 5 |
 | HEALTHCHECK_PORT | Prefetch will prefetch popular items when they are about to be expunged from the cache. This should match `DNS_HEALTH_PORT` | 8080 |
+| APPLICATION_NAME | Name of the application to display in the log | CoreDNS |
 
 ## Setup
 
