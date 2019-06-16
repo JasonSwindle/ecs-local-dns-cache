@@ -28,7 +28,7 @@ This project can handle DNS caching just for the docker containers or for the wh
 | Variables | Description | Example |
 | --- | ---   | ---     |
 | INTERVAL | How long between each health check interval. In seconds. | 5 |
-| MAX_FAILURES | Max number of failures before health check fails. | 5 |
+| RETRIES | Max number of failures before health check fails. | 5 |
 | START_PERIOD | How long to wait until the health check starts. In seconds. | 5 |
 | TIMEOUT | How long the health check should wait before timing out. In seconds. | 5 |
 | HEALTHCHECK_PORT | Prefetch will prefetch popular items when they are about to be expunged from the cache. This should match `DNS_HEALTH_PORT` | 8080 |

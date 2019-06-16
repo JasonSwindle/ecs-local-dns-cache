@@ -1,12 +1,16 @@
-FROM alpine
+FROM busybox
 
-ENV START_PERIOD=1 \
+ENV START_PERIOD=5 \
     INTERVAL=5 \
-    MAX_FAILURES=5
+    RETRIES=5 \
+    TIMEOUT=5 \
+    HEALTHCHECK_PORT=8080 \
+    APPLICATION_NAME=CoreDNS
 
-ADD healthcheck.sh /healthcheck.sh
+COPY healthcheck.sh /healthcheck.sh
 
-RUN apk add --no-cache curl && \
-    chmod +x /healthcheck.sh
+RUN chmod +x healthcheck.sh
+
+USER nobody
 
 ENTRYPOINT ["/healthcheck.sh"]
