@@ -2,6 +2,17 @@
 
 This project can handle DNS caching just for the docker containers or for the whole instance.  The caching application is CoreDNS with a very simple CoreFile.
 
+- [ECS Local DNS Cache](#ECS-Local-DNS-Cache)
+  - [Tested AMIs](#Tested-AMIs)
+  - [Environment Variables](#Environment-Variables)
+    - [DNS Cache Container](#DNS-Cache-Container)
+    - [DNS Cache Health Check Container](#DNS-Cache-Health-Check-Container)
+  - [Setup](#Setup)
+    - [Step 1](#Step-1)
+    - [Step 2](#Step-2)
+    - [Step 3](#Step-3)
+  - [FAQ](#FAQ)
+
 ## Tested AMIs
 
 | AMI | Tested | Status |
