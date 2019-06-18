@@ -61,13 +61,13 @@ Please make sure to change the place-holder Upstream DNS server IP, 172.31.0.2, 
 
 ### Step 1 (Install)
 
-- Run `ecs-local-dns-cache-bridge.taskdef.json` as a Daemon service.
+- Run [ecs-local-dns-cache-bridge.taskdef.json](ecs-local-dns-cache-bridge.taskdef.json) as a Daemon service.
 
 ### Step 2 (Configure)
 
 #### Network Mode: Bridge
 
-See `example-usage-bridge.taskdef.json` for a real-world example of the following.
+See [example-usage-bridge.taskdef.json](example-usage-bridge.taskdef.json) for a real-world example of the following.
 
 - Set the "dnsServers" parameter for your containers in your task definition(s) to:
 
@@ -113,7 +113,7 @@ Early test numbers before any type of tune has been performed. This test was als
 
 ### Benchmark
 
-``` bash
+```
 $ resperf -s 169.254.20.10 -d queryfile-example-10million-201202
 DNS Resolution Performance Testing Tool
 Version 2.2.1
@@ -137,7 +137,7 @@ Statistics:
 
 ### Docker Stats
 
-``` bash
+```
 CONTAINER ID        NAME                                                                    CPU %               MEM USAGE / LIMIT     MEM %               NET I/O             BLOCK I/O           PIDS
 67489f818fb2        ecs-ecs-local-dns-cache-24-dns-cache-healthcheck-c0e2bd86dcb7a0cede01   0.09%               1.07MiB / 1.916GiB    0.05%               0B / 0B             229kB / 0B          2
 40875d6040a1        ecs-ecs-local-dns-cache-24-dns-cache-d896beb292dff8f9b901               24.64%              15.47MiB / 1.916GiB   0.79%               0B / 0B             28.8MB / 0B         11
