@@ -1,16 +1,17 @@
 {
+  "cpu": "256",
+  "memory": "128",
+  "networkMode": "host",
+  "family": "ecs-local-dns-cache",
+  "requiresCompatibilities": [
+    "EC2"
+  ],
   "containerDefinitions": [{
-      "linuxParameters": {
-        "capabilities": {
-          "add": [
-            "NET_BIND_SERVICE"
-          ],
-          "drop": [
-            "ALL"
-          ]
-        }
-      },
+      "name": "dns-cache",
+      "image": "jasonswindle/ecs-local-dns-cache",
       "cpu": 0,
+      "essential": true,
+      "readonlyRootFilesystem": true,
       "environment": [{
           "name": "DNS_UPSTREAM",
           "value": "172.31.0.2"
@@ -40,16 +41,28 @@
           "value": "2500"
         }
       ],
-      "image": "jasonswindle/ecs-local-dns-cache",
+      "linuxParameters": {
+        "capabilities": {
+          "add": [
+            "NET_BIND_SERVICE"
+          ],
+          "drop": [
+            "ALL"
+          ]
+        }
+      },
       "dependsOn": [{
         "containerName": "route-creater",
         "condition": "COMPLETE"
-      }],
-      "essential": true,
-      "readonlyRootFilesystem": true,
-      "name": "dns-cache"
+      }]
     },
     {
+
+      "name": "route-creater",
+      "image": "jasonswindle/ecs-local-dns-cache-route-creater",
+      "cpu": 0,
+      "essential": false,
+      "readonlyRootFilesystem": true,
       "command": [
         "addr",
         "add",
@@ -68,14 +81,14 @@
             "ALL"
           ]
         }
-      },
-      "cpu": 0,
-      "image": "jasonswindle/ecs-local-dns-cache-route-creater",
-      "essential": false,
-      "readonlyRootFilesystem": true,
-      "name": "route-creater"
+      }
     },
     {
+      "name": "dns-cache-healthcheck",
+      "image": "jasonswindle/ecs-local-dns-cache-healthcheck",
+      "cpu": 0,
+      "essential": true,
+      "readonlyRootFilesystem": true,
       "linuxParameters": {
         "capabilities": {
           "add": [
@@ -86,7 +99,6 @@
           ]
         }
       },
-      "cpu": 0,
       "environment": [{
           "name": "INTERVAL",
           "value": "5"
@@ -112,21 +124,10 @@
           "value": "8080"
         }
       ],
-      "image": "jasonswindle/ecs-local-dns-cache-healthcheck",
       "dependsOn": [{
         "containerName": "dns-cache",
         "condition": "START"
-      }],
-      "essential": true,
-      "readonlyRootFilesystem": true,
-      "name": "dns-cache-healthcheck"
+      }]
     }
-  ],
-  "memory": "128",
-  "family": "ecs-local-dns-cache",
-  "requiresCompatibilities": [
-    "EC2"
-  ],
-  "networkMode": "host",
-  "cpu": "256"
+  ]
 }

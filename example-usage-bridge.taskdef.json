@@ -1,25 +1,25 @@
 {
-    "cpu": "128",
-    "memory": "25",
-    "networkMode": "bridge",
-    "family": "example-usage",
-    "requiresCompatibilities": [
-        "EC2"
+  "cpu": "128",
+  "memory": "25",
+  "networkMode": "bridge",
+  "family": "example-usage",
+  "requiresCompatibilities": [
+    "EC2"
+  ],
+  "containerDefinitions": [{
+    "name": "busybox-nslookup",
+    "image": "busybox",
+    "cpu": 0,
+    "essential": true,
+    "command": [
+      "nslookup",
+      "-type=a",
+      "-debug",
+      "ecs.aws"
     ],
-    "containerDefinitions": [{
-        "command": [
-            "nslookup",
-            "-type=a",
-            "-debug",
-            "ecs.aws"
-        ],
-        "cpu": 0,
-        "dnsServers": [
-            "169.254.20.10",
-            "172.31.0.2"
-        ],
-        "image": "busybox",
-        "name": "busybox",
-        "essential": true
-    }]
+    "dnsServers": [
+      "169.254.20.10",
+      "172.31.0.2"
+    ]
+  }]
 }
