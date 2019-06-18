@@ -81,7 +81,7 @@ See `example-usage-bridge.taskdef.json` for a real-world example of the followin
 - Verify it is working on the EC2 instance.
 
 ``` bash
-# for run in {1..2}; do sleep 1; docker run -it --dns 169.254.20.10 --dns 172.31.0.2 busybox nslookup -type=a -debug ecs.aws; done
+$ for run in {1..2}; do sleep 1; docker run -it --dns 169.254.20.10 --dns 172.31.0.2 busybox nslookup -type=a -debug ecs.aws; done
 ```
 
 - You should now see a success hit:
