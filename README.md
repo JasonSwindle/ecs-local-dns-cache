@@ -18,6 +18,9 @@ This project can handle DNS caching just for the docker containers or for the wh
       - [Network Mode: AWS VPC](#Network-Mode-AWS-VPC-1)
       - [Both](#Both)
   - [Metrics](#Metrics)
+  - [Performance](#Performance)
+    - [Benchmark](#Benchmark)
+    - [Docker Stats](#Docker-Stats)
   - [FAQ](#FAQ)
 
 ## Tested AMIs
@@ -103,6 +106,43 @@ coredns_cache_hits_total{server="dns://:53",type="success"} 1
 ## Metrics
 
 CoreDNS provides many metrics to understand cache hit / miss and if CoreDNS maybe lagging behind. Take a look at the file `METRICS.md` for a list of entries.
+
+## Performance
+
+Early test numbers before any type of tune has been performed. This test was also ran on the same EC2 instance (t3a.small).
+
+### Benchmark
+
+``` bash
+$ resperf -s 169.254.20.10 -d queryfile-example-10million-201202
+DNS Resolution Performance Testing Tool
+Version 2.2.1
+
+[Status] Command line: resperf -s 169.254.20.10 -d queryfile-example-10million-201202
+[Status] Sending
+[Status] Reached 65536 outstanding queries
+[Status] Waiting for more responses
+[Status] Testing complete
+
+Statistics:
+
+  Queries sent:         80258
+  Queries completed:    23533
+  Queries lost:         56725
+  Response codes:       NOERROR 14003 (59.50%), SERVFAIL 4855 (20.63%), NXDOMAIN 4675 (19.87%)
+  Run time (s):         54.813746
+  Maximum throughput:   4200.000000 qps
+  Lost at that point:   69.45%
+```
+
+### Docker Stats
+
+``` bash
+CONTAINER ID        NAME                                                                    CPU %               MEM USAGE / LIMIT     MEM %               NET I/O             BLOCK I/O           PIDS
+67489f818fb2        ecs-ecs-local-dns-cache-24-dns-cache-healthcheck-c0e2bd86dcb7a0cede01   0.09%               1.07MiB / 1.916GiB    0.05%               0B / 0B             229kB / 0B          2
+40875d6040a1        ecs-ecs-local-dns-cache-24-dns-cache-d896beb292dff8f9b901               24.64%              15.47MiB / 1.916GiB   0.79%               0B / 0B             28.8MB / 0B         11
+d15d11835b24        ecs-agent                                                               0.17%               12.87MiB / 1.916GiB   0.66%               0B / 0B             46.3MB / 13.1MB     13
+```
 
 ## FAQ
 
