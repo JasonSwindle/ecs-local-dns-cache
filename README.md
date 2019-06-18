@@ -9,11 +9,14 @@ This project can handle DNS caching just for the docker containers or for the wh
     - [DNS Cache Container](#DNS-Cache-Container)
     - [DNS Cache Health Check Container](#DNS-Cache-Health-Check-Container)
   - [Setup](#Setup)
-    - [Step 1](#Step-1)
-    - [Step 2](#Step-2)
+    - [Step 1 (Install)](#Step-1-Install)
+    - [Step 2 (Configure)](#Step-2-Configure)
       - [Network Mode: Bridge](#Network-Mode-Bridge)
       - [Network Mode: AWS VPC](#Network-Mode-AWS-VPC)
-    - [Step 3](#Step-3)
+    - [Step 3 (Test)](#Step-3-Test)
+      - [Network Mode: Bridge](#Network-Mode-Bridge-1)
+      - [Network Mode: AWS VPC](#Network-Mode-AWS-VPC-1)
+      - [Both](#Both)
   - [Metrics](#Metrics)
   - [FAQ](#FAQ)
 
@@ -53,11 +56,11 @@ This project can handle DNS caching just for the docker containers or for the wh
 
 Please make sure to change the place-holder Upstream DNS server IP in this example (172.31.0.2) with your own. 
 
-### Step 1
+### Step 1 (Install)
 
-- Run `ecs-local-dns-cache.taskdef.json` as a Daemon service.
+- Run `ecs-local-dns-cache-bridge.taskdef.json` as a Daemon service.
 
-### Step 2
+### Step 2 (Configure)
 
 #### Network Mode: Bridge
 
@@ -76,13 +79,21 @@ See `example-usage-bridge.taskdef.json` for a real-world example of the followin
 
 - Work in progress.
 
-### Step 3
+### Step 3 (Test)
 
 - Verify it is working on the EC2 instance.
+
+#### Network Mode: Bridge
 
 ``` bash
 $ for run in {1..2}; do sleep 1; docker run -it --dns 169.254.20.10 --dns 172.31.0.2 busybox nslookup -type=a -debug ecs.aws; done
 ```
+
+#### Network Mode: AWS VPC
+
+- Work in progress.
+
+#### Both
 
 - You should now see a success hit:
 
@@ -101,4 +112,4 @@ CoreDNS provides many metrics to understand cache hit / miss and if CoreDNS mayb
   - A: This is all that tested it on at the moment. AWS VPC network mode is currently being worked on.
 
 - Q: Will this work for Fargate?
-  - A: Not tested.
+  - A: Not tested, but until the DNS option is supported in Network Mode: AWS VPC, a different method is needed.
