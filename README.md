@@ -8,7 +8,7 @@ This project can handle DNS caching just for the docker containers or for the wh
   - [Environment Variables](#Environment-Variables)
     - [DNS Cache Container](#DNS-Cache-Container)
     - [DNS Cache Health Check Container](#DNS-Cache-Health-Check-Container)
-  - [Setup](#Setup)
+  - [Important](#Important)
     - [Step 1 (Install)](#Step-1-Install)
     - [Step 2 (Configure)](#Step-2-Configure)
       - [Network Mode: Bridge](#Network-Mode-Bridge)
@@ -52,9 +52,9 @@ This project can handle DNS caching just for the docker containers or for the wh
 | HEALTHCHECK_PORT | Prefetch will prefetch popular items when they are about to be expunged from the cache. This should match `DNS_HEALTH_PORT` | 8080 |
 | APPLICATION_NAME | Name of the application to display in the log | CoreDNS |
 
-## Setup
+## Important
 
-Please make sure to change the place-holder Upstream DNS server IP in this example (172.31.0.2) with your own. 
+Please make sure to change the place-holder Upstream DNS server IP, 172.31.0.2, with your own. 
 
 ### Step 1 (Install)
 
@@ -63,8 +63,6 @@ Please make sure to change the place-holder Upstream DNS server IP in this examp
 ### Step 2 (Configure)
 
 #### Network Mode: Bridge
-
-> Note: Make sure to change `172.31.0.2` to your upstream DNS IP.
 
 See `example-usage-bridge.taskdef.json` for a real-world example of the following.
 
