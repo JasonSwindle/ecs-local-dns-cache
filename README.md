@@ -61,9 +61,9 @@ Please make sure to change the place-holder Upstream DNS server IP in this examp
 
 #### Network Mode: Bridge
 
-See `example-usage-bridge.taskdef.json` for a real-world example of the following.
-
 > Note: Make sure to change `172.31.0.2` to your upstream DNS IP.
+
+See `example-usage-bridge.taskdef.json` for a real-world example of the following.
 
 - Set the "dnsServers" parameter for your containers in your task definition(s) to:
 
@@ -81,13 +81,13 @@ See `example-usage-bridge.taskdef.json` for a real-world example of the followin
 - Verify it is working on the EC2 instance.
 
 ``` bash
-for run in {1..2}; do sleep 1; docker run -it --dns 169.254.20.10 --dns 172.31.0.2 --dns-option "timeout:1 attempts:2" busybox nslookup -type=a -debug ecs.aws; done
+# for run in {1..2}; do sleep 1; docker run -it --dns 169.254.20.10 --dns 172.31.0.2 busybox nslookup -type=a -debug ecs.aws; done
 ```
 
 - You should now see a success hit:
 
 ```bash
-curl -s localhost:9153/metrics | grep 'coredns_cache_hits_total{server="dns://:53",type="success"}'
+$ curl -s localhost:9153/metrics | grep 'coredns_cache_hits_total{server="dns://:53",type="success"}'
 coredns_cache_hits_total{server="dns://:53",type="success"} 1
 ```
 
