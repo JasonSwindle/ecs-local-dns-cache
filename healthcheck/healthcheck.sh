@@ -25,13 +25,14 @@ sleep ${START_PERIOD}
 echo "$(date -Iseconds) [INFO] Starting health check on ${APPLICATION_NAME}"
 
 while [ ${FAILURES} -lt ${RETRIES} ]; do
-  sleep ${INTERVAL}
   if printf "GET /health HTTP/1.1\r\nhost:\r\nConnection: close\r\n\r\n" | nc -w ${TIMEOUT} localhost ${HEALTHCHECK_PORT} >/dev/null 2>&1; then
     FAILURES=0
   else
     FAILURES=$((FAILURES+1))
     echo "$(date -Iseconds) [ERROR] Health check failure ${FAILURES}"
   fi
+
+  sleep ${INTERVAL}
 done
 
 ## Should only run when the script breaks out of the WHILE loop.
