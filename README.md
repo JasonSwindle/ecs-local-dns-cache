@@ -11,6 +11,8 @@ This project can handle DNS caching just for the docker containers or for the wh
   - [Setup](#Setup)
     - [Step 1](#Step-1)
     - [Step 2](#Step-2)
+      - [Network Mode: Bridge](#Network-Mode-Bridge)
+      - [Network Mode: AWS VPC](#Network-Mode-AWS-VPC)
     - [Step 3](#Step-3)
   - [Metrics](#Metrics)
   - [FAQ](#FAQ)
@@ -57,18 +59,32 @@ Please make sure to change the place-holder Upstream DNS server IP in this examp
 
 ### Step 2
 
-- Set the "DNS" flag for your other containers to "169.254.20.10" in ECS.
+#### Network Mode: Bridge
+
+See `example-usage-bridge.taskdef.json` for a real-world example of the following.
+
+> Note: Make sure to change `172.31.0.2` to your upstream DNS IP.
+
+- Set the "dnsServers" parameter for your containers in your task definition(s) to:
+
+  ```
+  169.254.20.10
+  172.31.0.2
+  ```
+
+#### Network Mode: AWS VPC
+
+- Work in progress.
 
 ### Step 3
 
 - Verify it is working on the EC2 instance.
 
 ``` bash
-# Run this twice
-docker run --dns=169.254.20.10 jasonswindle/docker-tools:drill google.com
+for run in {1..2}; do sleep 1; docker run -it --dns 169.254.20.10 --dns 172.31.0.2 --dns-option "timeout:1 attempts:2" busybox nslookup -type=a -debug ecs.aws; done
 ```
 
-- You should now see a success hit (Did you run `drill` twice?):
+- You should now see a success hit:
 
 ```bash
 curl -s localhost:9153/metrics | grep 'coredns_cache_hits_total{server="dns://:53",type="success"}'

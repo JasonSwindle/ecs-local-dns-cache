@@ -1,0 +1,25 @@
+{
+    "cpu": "128",
+    "memory": "25",
+    "networkMode": "bridge",
+    "family": "example-usage",
+    "requiresCompatibilities": [
+        "EC2"
+    ],
+    "containerDefinitions": [{
+        "command": [
+            "nslookup",
+            "-type=a",
+            "-debug",
+            "ecs.aws"
+        ],
+        "cpu": 0,
+        "dnsServers": [
+            "169.254.20.10",
+            "172.31.0.2"
+        ],
+        "image": "busybox",
+        "name": "busybox",
+        "essential": true
+    }]
+}
