@@ -2,6 +2,7 @@
 
 This project can handle DNS caching just for the docker containers or for the whole instance.  The caching application is CoreDNS with a very simple CoreFile.
 
+**Table of Contents**
 - [ECS Local DNS Cache](#ECS-Local-DNS-Cache)
   - [Tested AMIs](#Tested-AMIs)
   - [Environment Variables](#Environment-Variables)
@@ -11,6 +12,7 @@ This project can handle DNS caching just for the docker containers or for the wh
     - [Step 1](#Step-1)
     - [Step 2](#Step-2)
     - [Step 3](#Step-3)
+  - [Metrics](#Metrics)
   - [FAQ](#FAQ)
 
 ## Tested AMIs
@@ -73,7 +75,14 @@ curl -s localhost:9153/metrics | grep 'coredns_cache_hits_total{server="dns://:5
 coredns_cache_hits_total{server="dns://:53",type="success"} 1
 ```
 
+## Metrics
+
+CoreDNS provides many metrics to understand cache hit / miss and if CoreDNS maybe lagging behind. Take a look at the file `METRICS.md` for a list of entries.
+
 ## FAQ
 
 - Q: Does this work for ECS Bridge Mode?
-  - A: This is all I have tested it on at the moment.
+  - A: This is all that tested it on at the moment. AWS VPC network mode is currently being worked on.
+
+- Q: Will this work for Fargate?
+  - A: Not tested.
