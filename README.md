@@ -78,11 +78,11 @@ See [example-usage-bridge.taskdef.json](example-usage-bridge.taskdef.json) for a
 
 #### Network Mode: AWS VPC
 
-- Work in progress.
+Work in progress.
 
 ### Step 3 (Test)
 
-- Verify it is working on the EC2 instance.
+Verify it is working on the EC2 instance.
 
 #### Network Mode: Bridge
 
@@ -96,7 +96,7 @@ $ for run in {1..2}; do sleep 1; docker run -it --dns 169.254.20.10 --dns 172.31
 
 #### Both
 
-- You should now see a success hit:
+You should now see a success hit:
 
 ```bash
 $ curl -s localhost:9153/metrics | grep 'coredns_cache_hits_total{server="dns://:53",type="success"}'

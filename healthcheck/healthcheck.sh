@@ -2,6 +2,7 @@
 
 # Time format is RFC-2822
 
+CHECK_PATH=localhost
 FAILURES=0
 RETRIES=5
 START_PERIOD=5
@@ -10,6 +11,7 @@ TIMEOUT=5
 HEALTHCHECK_PORT=8080
 APPLICATION_NAME=CoreDNS
 VERSION=v1
+EXIT_CODE=1
 
 ## Let the user know the script started.
 echo "$(date -Iseconds) [INFO] Busybox Docker health check version ${VERSION}"
@@ -25,7 +27,7 @@ sleep ${START_PERIOD}
 echo "$(date -Iseconds) [INFO] Starting health check on ${APPLICATION_NAME}"
 
 while [ ${FAILURES} -lt ${RETRIES} ]; do
-  if printf "GET /health HTTP/1.1\r\nhost:\r\nConnection: close\r\n\r\n" | nc -w ${TIMEOUT} localhost ${HEALTHCHECK_PORT} >/dev/null 2>&1; then
+  if printf "GET /health HTTP/1.1\r\nhost:\r\nConnection: close\r\n\r\n" | nc -w ${TIMEOUT} ${CHECK_PATH} ${HEALTHCHECK_PORT} >/dev/null 2>&1; then
     FAILURES=0
   else
     FAILURES=$((FAILURES+1))
@@ -37,3 +39,6 @@ done
 
 ## Should only run when the script breaks out of the WHILE loop.
 echo "$(date -Iseconds) [CRITICAL] Health check failed, closing"
+
+## Make the container exit with error 1, or user defined number.
+exit ${EXIT_CODE}
