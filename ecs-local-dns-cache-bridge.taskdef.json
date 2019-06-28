@@ -104,7 +104,7 @@
           "value": "5"
         },
         {
-          "name": "MAX_FAILURES",
+          "name": "RETRIES",
           "value": "5"
         },
         {
@@ -122,6 +122,10 @@
         {
           "name": "HEALTHCHECK_PORT",
           "value": "8080"
+        },
+        {
+          "name": "CHECK_PATH",
+          "value": "localhost"
         }
       ],
       "dependsOn": [{

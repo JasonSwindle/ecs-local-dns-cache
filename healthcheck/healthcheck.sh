@@ -1,17 +1,19 @@
 #!/bin/sh
 
-# Time format is RFC-2822
+## Time format is RFC-2822
 
-CHECK_PATH=localhost
+## User configurable
+CHECK_PATH="${CHECK_PATH:-localhost}"
+RETRIES="${RETRIES:-5}"
+START_PERIOD="${START_PERIOD:-5}"
+INTERVAL="${INTERVAL:-5}"
+TIMEOUT="${TIMEOUT:-5}"
+HEALTHCHECK_PORT="${HEALTHCHECK_PORT:-8080}"
+APPLICATION_NAME="${APPLICATION_NAME:-CoreDNS}"
+EXIT_CODE="${EXIT_CODE:-1}"
+
 FAILURES=0
-RETRIES=5
-START_PERIOD=5
-INTERVAL=5
-TIMEOUT=5
-HEALTHCHECK_PORT=8080
-APPLICATION_NAME=CoreDNS
 VERSION=v1
-EXIT_CODE=1
 
 ## Let the user know the script started.
 echo "$(date -Iseconds) [INFO] Busybox Docker health check version ${VERSION}"
