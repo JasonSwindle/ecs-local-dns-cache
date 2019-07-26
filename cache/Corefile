@@ -1,12 +1,14 @@
 .:53 {
+    any
     errors
+    log
     health :{$DNS_HEALTH_PORT} # Default :8080
     prometheus :{$DNS_PROMETHEUS_PORT} # Default :9153
     forward . {$DNS_UPSTREAM}
     cache {$DNS_CACHE_TIME} {
-        success {$DNS_CACHE_SUCCESS} # 5000
-        denial {$DNS_CACHE_DENIAL} # 2500
-        prefetch {$DNS_CACHE_PREFETCH} # 10
+        success {$DNS_CACHE_SUCCESS}
+        denial {$DNS_CACHE_DENIAL}
+        prefetch {$DNS_CACHE_PREFETCH}
     }
     loop
     reload

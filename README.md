@@ -87,7 +87,11 @@ Verify it is working on the EC2 instance.
 #### Network Mode: Bridge
 
 ``` bash
-$ for run in {1..2}; do sleep 1; docker run -it --dns 169.254.20.10 --dns 172.31.0.2 busybox nslookup -type=a -debug ecs.aws; done
+$ for run in {1..2}; do sleep 1; docker run -it \
+  --dns 169.254.20.10 \
+  --dns 172.31.0.2 \
+  busybox nslookup -type=a -debug ecs.aws; \
+done
 ```
 
 #### Network Mode: AWS VPC
